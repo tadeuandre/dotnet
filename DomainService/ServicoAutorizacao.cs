@@ -21,7 +21,7 @@ namespace DomainService
             }
         }
 
-        public void NaoAutorizarSolicitacao(Solicitacao solicitacao)
+        public void DesautorizarSolicitacao(Solicitacao solicitacao)
         {
             if (TipoStatusSolicitacao.AguardandoAutorizacao.Equals(solicitacao.TipoStatusSolicitacao))
             {

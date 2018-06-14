@@ -32,7 +32,7 @@ namespace DomainService
             Solicitacao[] solicitacoes = solicitacaoRepository.GetAll();
             solicitacoes.FirstOrDefault(s => s.Codigo == solicitacao.Codigo);
 
-            if (solicitacoes.Length == 0)
+            if (solicitacoes.Length == 0 || !TipoStatusSolicitacao.Concluida.Equals(solicitacoes.ElementAt(0).TipoStatusSolicitacao))
             {
                 solicitacaoRepository.Create(solicitacao);
             }

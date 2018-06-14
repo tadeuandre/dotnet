@@ -9,6 +9,6 @@ namespace DomainModel.Interfaces.Services
     {
         void AutorizarSolicitacao(Solicitacao solicitacao);
 
-        void NaoAutorizarSolicitacao(Solicitacao solicitacao);
+        void DesautorizarSolicitacao(Solicitacao solicitacao);
     }
 }

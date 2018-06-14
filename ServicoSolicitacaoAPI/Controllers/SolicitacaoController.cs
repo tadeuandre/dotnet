@@ -17,7 +17,7 @@ namespace ServicoSolicitacaoAPI.Controllers
         Solicitacao solDeptoPessoal = new Solicitacao();
         solDeptoPessoal.CustoTotal = 5000;
         solDeptoPessoal.Detalhes = "Controle de Benefícios";
-
+        
         Solicitacao solDiretoria = new Solicitacao();
         solDiretoria.CustoTotal = 3000;
         solDiretoria.Detalhes = "Orçamentos de Estratégia";
