@@ -68,7 +68,8 @@ namespace ServicoSolicitacaoAPI.Controllers
             return solicitacoes;
         }
 
-        public IHttpActionResult GetSolicitacao(Guid codigo)
+        [HttpGet]
+        public IHttpActionResult Solicitacao(Guid codigo)
         {
             var solicitacao = solicitacoes.FirstOrDefault((s) => s.Codigo == codigo);
             if (solicitacao == null)
@@ -76,6 +77,33 @@ namespace ServicoSolicitacaoAPI.Controllers
                 return NotFound();
             }
             return Ok(solicitacao);
+        }
+
+        [HttpPost]
+        [ActionName("Complex")]
+        public HttpResponseMessage PostComplex(Solicitacao solicitacao)
+        {
+            if (ModelState.IsValid && solicitacao != null)
+            {
+                // Assign a new ID.
+                var id = Guid.NewGuid();
+                solicitacao.Codigo = id;
+
+                servicoSolicitacao.CriarSolicitacao(solicitacao);
+                solicitacoes = servicoSolicitacao.ObterSolicitacoes();
+                // Create a 201 response.
+                var response = new HttpResponseMessage(HttpStatusCode.Created)
+                {
+                    Content = new StringContent(solicitacao.Detalhes)
+                };
+                response.Headers.Location =
+                    new Uri(Url.Link("DefaultApi", new { action = "solicitacao", id = id }));
+                return new HttpResponseMessage(HttpStatusCode.Created);
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
         }
     }
 }
