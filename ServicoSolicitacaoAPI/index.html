@@ -142,7 +142,7 @@
 					.error(function () {
 						$('#message').html("Error posting the update.");
 					});
-
+				$('#exampleModal').modal('hide');
 				$('#solicitacoes').html(response);
 				return false;
 			});

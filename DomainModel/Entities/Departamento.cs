@@ -6,6 +6,10 @@ namespace DomainModel.Entities
 {
     public class Departamento
     {
+        public Departamento (string nome)
+        {
+            descricao = nome;
+        }
         public Guid codigo { get; set; }
 
         public string descricao { get; set; }

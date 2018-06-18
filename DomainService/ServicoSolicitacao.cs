@@ -4,6 +4,7 @@ using System.Linq;
 using DomainModel.Interfaces.Repositories;
 using DomainModel.Interfaces.Services;
 using System.Collections.Generic;
+using System;
 
 namespace DomainService
 {
@@ -31,6 +32,20 @@ namespace DomainService
         {
             Solicitacao[] solicitacoes = solicitacaoRepository.GetAll();
             solicitacoes.FirstOrDefault(s => s.Codigo == solicitacao.Codigo);
+
+            // Validações.
+            if (solicitacoes.Length != 0)
+            { 
+                for (int i = 0; i < solicitacoes.Length; i++)
+                {
+                    Solicitacao itemLista = solicitacoes[i];
+                    if (itemLista.Departamento.descricao.Equals(solicitacao.Departamento.descricao))
+                    {
+                        Console.WriteLine("Já existe solicitação do departamento " + solicitacao.Departamento.descricao);
+                        return;
+                    }
+                }
+            }
 
             if (solicitacoes.Length == 0 || !TipoStatusSolicitacao.Concluida.Equals(solicitacoes.ElementAt(0).TipoStatusSolicitacao))
             {

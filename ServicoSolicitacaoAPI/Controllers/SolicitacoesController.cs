@@ -96,9 +96,11 @@ namespace ServicoSolicitacaoAPI.Controllers
                 {
                     Content = new StringContent(solicitacao.Detalhes)
                 };
-                response.Headers.Location =
-                    new Uri(Url.Link("DefaultApi", new { action = "solicitacao", id = id }));
-                return new HttpResponseMessage(HttpStatusCode.Created);
+                //response.Headers.Location = new Uri(Url.Link("DefaultApi", new { action = "solicitacao", id = id }));
+                response = Request.CreateResponse(HttpStatusCode.Moved);
+                response.Headers.Location = new Uri("http://localhost:50071/index.html");
+                return response;
+                //return new HttpResponseMessage(HttpStatusCode.Created);
             }
             else
             {

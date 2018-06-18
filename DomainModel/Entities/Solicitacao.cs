@@ -7,6 +7,11 @@ namespace DomainModel.Entities
 {
     public class Solicitacao : TEntity
     {
+        public Solicitacao()
+        {
+            this.Codigo = Guid.NewGuid();
+        }
+
         public Guid Codigo { get; set; }
 
         public string Detalhes { get; set; }
